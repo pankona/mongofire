@@ -1,0 +1,15 @@
+version: "3.7"
+services:
+  app:
+    image: pankona/mongo
+    build:
+      context: .
+      dockerfile: main/Dockerfile
+    command: ["sh", "-c", "cd main && go run ."]
+    depends_on: [mongo]
+  mongo:
+    image: mongo:3.6
+    volumes:
+      - mongo-data:/data/db
+volumes:
+  mongo-data:
